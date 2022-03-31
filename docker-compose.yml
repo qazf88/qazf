@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  qazf-mosquitto:
+    #image: qazf88/photobox-camera:version1.0.0
+    build: ./
+    ports:
+      - "${CAMERA_PORT}:${CAMERA_PORT}"
+    restart: always
+    privileged: true
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+    command: [ "/usr/bin/camera", "-api=true", "-port=${CAMERA_PORT}" ]
